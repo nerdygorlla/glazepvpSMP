@@ -1,0 +1,7 @@
+# Render Blueprint for the GlazeSMP site (static site, free plan).
+# Put this file in the same GitHub repo folder as index.html.
+services:
+  - type: web
+    runtime: static
+    name: glazesmp
+    staticPublishPath: .

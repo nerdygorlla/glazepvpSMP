@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GlazeSMP</title>
+<meta name="description" content="GlazeSMP is a Minecraft economy survival server with an auction house, shards, spawners and open-world PvP.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#120C1A; --surface:#1B1326; --tint:#2A1633; --border:#2E2140; --border2:#3B2B4F;
+  --text:#F3EDF7; --muted:#A898B5; --accent:#FF6FB1; --accent-soft:#FF8DC3;
+  --display:'Bricolage Grotesque',system-ui,sans-serif;
+  --body:'Inter',system-ui,sans-serif;
+  --mono:ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.6}
+a{color:var(--accent-soft)}
+a:hover{color:#FFB3D9}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.logo{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-.5px;color:var(--text);text-decoration:none}
+.logo span{color:var(--accent)}
+header{border-bottom:1px solid var(--border)}
+.bar{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:16px}
+.bar-right{display:flex;flex-wrap:wrap;gap:28px;align-items:center}
+nav{display:flex;flex-wrap:wrap;gap:28px;font-size:14px;font-weight:500}
+nav a{color:var(--muted);text-decoration:none}
+nav a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 26px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid transparent;font-family:inherit;cursor:pointer}
+.btn-primary{background:var(--accent);color:#120C1A}
+.btn-primary:hover{background:#FF86BE;color:#120C1A}
+.btn-ghost{border-color:var(--border2);color:var(--text)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--text)}
+.btn-sm{min-height:44px;padding:0 20px;font-size:14px}
+.hero{background:radial-gradient(900px 420px at 85% 0,#2A1633 0,#120C1A 70%)}
+.hero-in{display:flex;flex-wrap:wrap;gap:56px;align-items:center;padding-top:88px;padding-bottom:80px}
+.hero-copy{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:24px;align-items:flex-start}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--accent)}
+h1,h2,h3{font-family:var(--display);margin:0}
+h1{font-weight:800;font-size:clamp(40px,6.5vw,72px);line-height:1.02;letter-spacing:-1.5px;text-wrap:balance}
+h2{font-weight:700;font-size:clamp(30px,4.5vw,44px);line-height:1.1;letter-spacing:-1px}
+.lead{margin:0;font-size:18px;color:var(--muted);max-width:520px}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.card{flex:1 1 340px;min-width:0;max-width:460px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:20px}
+.label{font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.addr-label{font-size:13px;color:var(--muted);margin-bottom:8px}
+.addr{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:6px 6px 6px 16px;border:1px solid var(--border2);border-radius:12px;background:var(--bg)}
+.addr code{flex:1 1 140px;min-width:0;font-family:var(--mono);font-size:15px;font-weight:600;user-select:all;overflow-wrap:anywhere}
+.addr button{background:var(--accent);color:#120C1A;border:0;border-radius:8px;padding:0 18px;min-height:44px;font:600 14px var(--body);cursor:pointer}
+.addr button:hover{background:#FF86BE}
+.rows{display:flex;flex-direction:column;font-size:15px}
+.row{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--border)}
+.row span:first-child{color:var(--muted)}
+.row span:last-child{font-weight:600}
+section{border-top:1px solid var(--border)}
+.sec{padding-top:88px;padding-bottom:88px;display:flex;flex-direction:column;gap:48px}
+.sec-head{display:flex;flex-direction:column;gap:12px;max-width:620px}
+.sec-head p{margin:0;font-size:17px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.feature{padding:24px;border-radius:16px;background:var(--surface);border:1px solid var(--border);display:flex;flex-direction:column;gap:10px}
+.cmd{align-self:flex-start;padding:4px 10px;border-radius:6px;background:var(--tint);font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent-soft)}
+.feature h3{font-weight:700;font-size:20px;letter-spacing:-.3px}
+.feature p{margin:0;font-size:15px;color:var(--muted)}
+#join{background:var(--surface);border-bottom:1px solid var(--border)}
+.steps{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.steps li{padding:28px;border-radius:16px;background:var(--bg);border:1px solid var(--border);display:flex;flex-direction:column;gap:12px}
+.num{font-family:var(--display);font-weight:800;font-size:32px;color:var(--accent)}
+.steps strong{font-family:var(--display);font-size:20px}
+.steps span.t{font-size:15px;color:var(--muted)}
+.steps code{font-family:var(--mono);color:var(--text);overflow-wrap:anywhere}
+.rules-in{display:flex;flex-wrap:wrap;gap:56px;padding-top:88px;padding-bottom:88px}
+.rules-head{flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.rules-head p{margin:0;font-size:17px;color:var(--muted)}
+.rules-list{flex:2 1 380px;min-width:0;margin:0;padding:0;list-style:none}
+.rules-list li{padding:18px 0;border-top:1px solid var(--border);font-size:16px}
+footer{border-top:1px solid var(--border)}
+.foot{padding-top:32px;padding-bottom:48px;display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:space-between;font-size:14px;color:var(--muted)}
+.foot .logo{font-size:18px;display:block;margin-bottom:4px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#top">Glaze<span>SMP</span></a>
+    <div class="bar-right">
+      <nav aria-label="Main">
+        <a href="#features">Features</a>
+        <a href="#join">How to join</a>
+        <a href="#rules">Rules</a>
+      </nav>
+      <a class="btn btn-primary btn-sm" href="#join">Play now</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap hero-in">
+      <div class="hero-copy">
+        <div class="eyebrow">Economy survival &middot; Java Edition</div>
+        <h1>Build your fortune from the ground up.</h1>
+        <p class="lead">GlazeSMP is a player-run economy server with an auction house, shards, stackable spawners and open-world PvP. Farm, trade and climb the leaderboard.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#join">How to join</a>
+          <a class="btn btn-ghost" href="#features">See features</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="label">Server details</div>
+        <div>
+          <div class="addr-label">Java address</div>
+          <div class="addr">
+            <code id="server-ip">glazesmpp.falix.gg</code>
+            <button id="copy-ip" type="button">Copy</button>
+          </div>
+        </div>
+        <div class="rows">
+          <div class="row"><span>Version</span><span>26.2</span></div>
+          <div class="row"><span>Edition</span><span>Java</span></div>
+          <div class="row"><span>Mode</span><span>Economy survival</span></div>
+          <div class="row"><span>PvP</span><span>Open world</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="features">
+    <div class="wrap sec">
+      <div class="sec-head">
+        <div class="eyebrow">Features</div>
+        <h2>A complete economy loop</h2>
+        <p>Farm drops, sell them, spend the money and turn your profit into bigger farms.</p>
+      </div>
+      <div class="grid">
+        <div class="feature"><div class="cmd">/sell</div><h3>Live economy</h3><p>Sell crops, mob drops and ores for money. Check prices with /worth and your totals with /sellhistory.</p></div>
+        <div class="feature"><div class="cmd">/ah</div><h3>Auction house</h3><p>List loot for other players, search by category and flip items for profit.</p></div>
+        <div class="feature"><div class="cmd">/order</div><h3>Orders board</h3><p>Post a buy order for what you need and let other players fill it for you.</p></div>
+        <div class="feature"><div class="cmd">/shards</div><h3>Shards</h3><p>A second currency earned in the AFK zone and from PvP. Spend it in the shard shop and on crates.</p></div>
+        <div class="feature"><div class="cmd">/rtp</div><h3>Random teleport</h3><p>Drop into a random spot in the wild and start a base wherever you land.</p></div>
+        <div class="feature"><div class="cmd">/team</div><h3>Teams</h3><p>Invite friends, set team homes, use team chat and manage PvP between members.</p></div>
+        <div class="feature"><div class="cmd">spawners</div><h3>Spawner farms</h3><p>Stack spawners and build money farms. The drops are your main income.</p></div>
+        <div class="feature"><div class="cmd">/bounty</div><h3>Bounties and duels</h3><p>Put a price on a rival, or challenge someone to a duel in the ranked arena.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="join">
+    <div class="wrap sec">
+      <div class="sec-head">
+        <div class="eyebrow">Get started</div>
+        <h2>Join in three steps</h2>
+      </div>
+      <ol class="steps">
+        <li><div class="num">1</div><strong>Open Minecraft Java</strong><span class="t">Launch the game on version 26.2.</span></li>
+        <li><div class="num">2</div><strong>Add the server</strong><span class="t">Go to Multiplayer, choose Add Server, and enter <code>glazesmpp.falix.gg</code> as the address.</span></li>
+        <li><div class="num">3</div><strong>Run /rtp and start farming</strong><span class="t">Teleport into the wild, build your first farm, and sell your drops with /sell.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="rules">
+    <div class="wrap rules-in">
+      <div class="rules-head">
+        <div class="eyebrow">Rules</div>
+        <h2>Play fair</h2>
+        <p>PvP and raiding are part of the game. Cheating is not.</p>
+      </div>
+      <ul class="rules-list">
+        <li>No hacked clients, x-ray, or macros that give an unfair advantage.</li>
+        <li>No exploiting bugs or duping items. Report them to staff instead.</li>
+        <li>No scamming, and no selling accounts, items or currency for real money.</li>
+        <li>Keep chat respectful: no hate speech, harassment or spam.</li>
+        <li>One account per player in the AFK zone. Bots there are banned.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <a class="logo" href="#top">Glaze<span>SMP</span></a>
+      Not affiliated with Mojang or Microsoft.
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var btn = document.getElementById('copy-ip');
+  var ip = document.getElementById('server-ip');
+  btn.addEventListener('click', function () {
+    var text = ip.textContent.trim();
+    function done() {
+      btn.textContent = 'Copied';
+      setTimeout(function () { btn.textContent = 'Copy'; }, 1800);
+    }
+    function fallback() {
+      var r = document.createRange();
+      r.selectNodeContents(ip);
+      var s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(r);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(fallback);
+    } else {
+      fallback();
+    }
+  });
+})();
+</script>
+</body>
+</html>
